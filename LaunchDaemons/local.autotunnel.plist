@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>local.autotunnel</string>
+  <!-- <key>Program</key>
+  <string>/sbin/autotunnel</string> -->
+  <key>ProgramArguments</key>
+  <array>
+  <string>/sbin/autotunnel</string>
+<!--  <string>2>&1|tee</string>
+  <string>-a</string>
+  <string>/Library/Logs/autotun.log</string> -->
+  </array>
+  <key>WatchPaths</key>
+  <array>
+    <string>/Library/Preferences/SystemConfiguration/preferences.plist</string>
+    <string>/Library/Preferences/SystemConfiguration/com.apple.wifi.plist</string>
+    <string>/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist</string>
+    <string>/Library/Preferences/SystemConfiguration/com.apple.network.identification.plist</string>
+	<key>StartInterval</key>
+	<integer>60</integer>
+  </array>
+	<key>StandardErrorPath</key>
+	<string>/Library/Logs/autotun.log</string>
+	<key>StandardOutPath</key>                            
+	<string>/Library/Logs/autotun.log</string>
+</dict>
+</plist>

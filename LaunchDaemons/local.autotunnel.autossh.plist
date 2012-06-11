@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>local.autotunnel.autossh</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <!-- Be a lot more respnsive -->
+    <key>AUTOSSH_POLL</key>
+    <string>5</string>
+  </dict>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/autossh</string>
+    <string>-M</string>
+    <string>31337</string>
+    <string>-N</string>
+    <string>-f</string>
+    <string>-R</string>
+    <string>7217:localhost:22</string>
+    <string>mobile@grinnan.com</string>
+    <!-- <string>;</string>
+    <string>/usr/bin/autossh</string>
+    <string>-M</string>
+    <string>31347</string>
+    <string>-N</string>
+    <string>-f</string>
+    <string>-R</string>
+    <string>7218:localhost:22</string>
+    <string>mobile@grinnan.com</string> -->
+  </array>
+  <key>KeepAlive</key>
+  <dict>
+    <key>NetworkState</key>
+    <true/>
+  </dict>
+  <key>StandardErrorPath</key>
+  <string>/Library/Logs/autotun.autossh.log</string>
+  <key>StandardOutPath</key>
+  <string>/Library/Logs/autotun.autossh.log</string>
+</dict>
+</plist>

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+sleep 10
+log="/Library/Logs/autotun.log"
+echo `date`" Starting /sbin/autossh"  
+contest=`ssh mobile@grinnan.com "ssh localhost -p 7217 hostname"`
+hostname=`hostname`
+echo "contest = "$contest
+echo "hostame = "$hostname
+if [ "$contest" != "$hostname" ]
+then
+	echo `date`" No connection to grinnan.com" 
+	echo `date`" Killing autossh" 
+	killall autossh 
+	echo `date`" Killing ssh" 
+	killall ssh 
+	#sleep 5
+	echo `date`" Killing sshd on the server for user mobile" 
+	ssh mobile@grinnan.com "killall sshd" 
+	echo `date`" Loading Daemon: /Library/LaunchDaemons/local.autotunnel.autossh.plist" 
+	launchctl load -w /Library/LaunchDaemons/local.autotunnel.autossh.plist  
+else
+	echo `date`" Still connected to grinnan.com" 
+fi
+
+###
+# We can't start the autotunnel directly because launchd is uncooperative
+# (I can't find a way to fork where autossh keeps running, and if it you
+# leave it running autotunnel won't be called again. Boo!)
+###
+
+#if [[ `networksetup -getsocksfirewallproxy Airport | grep 'Enabled: Yes'` ]]; then
+  # Start
+#killall ssh
+#  launchctl unload -w /Library/LaunchDaemons/local.autotunnel.autossh.plist 2> /dev/null
+# Thanks Lion!  
+#elif [[ `networksetup -getsocksfirewallproxy Wi-Fi | grep 'Enabled: Yes'` ]]; then
+  # Start
+#  launchctl load -w ~/Library/LaunchAgents/local.autotunnel.autossh.plist 2> /dev/null
+#else
+  # Stop
+#  launchctl unload -w ~/Library/LaunchAgents/local.autotunnel.autossh.plist 2> /dev/null
+#fi
